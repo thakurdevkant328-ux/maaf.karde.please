@@ -2,140 +2,171 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>For Vaishnavi ❤️</title>
-<style>
-    /* --- IMPORT FONTS --- */
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@600&display=swap');
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@700&family=Parisienne&display=swap" rel="stylesheet">
 
+<style>
     :root {
-        --primary-color: #ff4d6d;
-        --bg-color: #fff0f3;
-        --chat-bg: #e5ddd5;
-        --sent-bg: #dcf8c6;
+        /* New Premium Color Palette */
+        --primary: #d4af37; /* Gold */
+        --secondary: #ff8fa3; /* Soft Pink */
+        --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #fff5e6 100%);
+        --glass-bg: rgba(255, 255, 255, 0.85);
+        --text-dark: #4a4a4a;
+        --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
     }
 
-    /* --- 1. CAT PAW CURSOR --- */
+    /* --- 1. BASE STYLES & CURSOR --- */
     body {
         margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background: var(--bg-color);
-        color: #333;
+        font-family: 'Montserrat', sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-dark);
         overflow-x: hidden;
+        /* Cat Paw Cursor */
         cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat984.cur'), auto; 
     }
 
-    a, button, .jar-container, .gift-box, input[type=range] {
+    a, button, .jar-container, .gift-box, input[type=range], .polaroid {
         cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat984.cur'), pointer;
     }
 
-    /* --- 2. FLOATING HEARTS BACKGROUND --- */
+    /* --- 2. FLOATING HEARTS (Improved) --- */
     .bg-hearts {
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        overflow: hidden;
-        z-index: -1;
-        pointer-events: none;
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        overflow: hidden; z-index: -1; pointer-events: none;
     }
     .heart-bg {
-        position: absolute;
-        bottom: -10px;
-        color: rgba(255, 77, 109, 0.2);
-        animation: floatUp 10s linear infinite;
-        font-size: 20px;
+        position: absolute; bottom: -100px;
+        color: var(--secondary); opacity: 0.4;
+        animation: floatUp linear infinite;
     }
     @keyframes floatUp {
-        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-        100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        to { transform: translateY(-120vh) rotate(360deg); }
     }
 
-    /* --- OVERLAY --- */
+    /* --- OVERLAY (Start Screen) --- */
     #start-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: #000;
+        background: rgba(0,0,0,0.9);
         display: flex; justify-content: center; align-items: center;
-        z-index: 9999; color: white; flex-direction: column;
+        z-index: 9999; color: white; flex-direction: column; text-align: center;
     }
+    #start-overlay h1 { font-family: 'Parisienne', cursive; font-size: 3.5rem; color: var(--secondary); margin-bottom: 10px;}
     #start-btn {
-        padding: 15px 30px; background: var(--primary-color);
+        padding: 15px 40px; background: linear-gradient(45deg, var(--secondary), var(--primary));
         border: none; color: white; font-size: 18px; border-radius: 50px;
-        margin-top: 20px; animation: pulse 2s infinite;
+        margin-top: 30px; box-shadow: 0 5px 15px rgba(255, 143, 163, 0.4);
+        transition: transform 0.3s;
     }
+    #start-btn:hover { transform: scale(1.05); }
 
+    /* --- SECTIONS (Glassmorphism Effect) --- */
     section {
-        padding: 40px 20px; max-width: 600px; margin: auto;
-        text-align: center; background: white; margin-bottom: 20px;
-        border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        position: relative; z-index: 1;
+        padding: 50px 30px; max-width: 700px; margin: 40px auto;
+        text-align: center;
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        border-radius: 25px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; /* For scroll animation */
     }
+    section.visible { opacity: 1; transform: translateY(0); }
 
-    h1 { color: var(--primary-color); margin-bottom: 5px; }
-    h2 { color: #444; margin-top: 0; }
-    p { font-size: 16px; line-height: 1.6; color: #666; }
+    h1 { font-family: 'Parisienne', cursive; color: var(--secondary); font-size: 3rem; margin-bottom: 10px; }
+    h2 { font-family: 'Montserrat', sans-serif; font-weight: 600; color: #333; letter-spacing: 1px; position: relative; display: inline-block; margin-bottom: 30px;}
+    h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: var(--primary); }
+    p { font-size: 1.1rem; line-height: 1.8; color: #555; }
 
+    /* --- COMPONENTS --- */
+    
+    /* Text Boxes (Confession/Apology) */
     .text-content {
-        text-align: left; background: #fafafa; padding: 20px;
-        border-radius: 10px; border-left: 5px solid var(--primary-color);
-        margin-bottom: 10px;
+        text-align: left; background: #fff; padding: 30px;
+        border-radius: 15px; border-left: 4px solid var(--primary);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
-    .highlight { background-color: #fff3cd; padding: 2px 5px; border-radius: 4px; font-weight: 600; }
+    .highlight { background-color: #fff0c4; padding: 2px 5px; border-radius: 4px; font-weight: 600; color: #333;}
 
+    /* Poetry */
     .poetry-box {
-        font-family: 'Dancing Script', cursive; font-size: 22px; line-height: 1.8;
-        color: #d63384; background: #fff0f3; padding: 20px;
-        border-radius: 15px; border: 1px dashed var(--primary-color);
+        font-family: 'Dancing Script', cursive; font-size: 1.8rem;
+        line-height: 1.6; color: #d63384;
+        background: linear-gradient(to right, #fff0f3, #fff);
+        padding: 40px; border-radius: 15px;
+        position: relative;
     }
+    .poetry-box::before, .poetry-box::after { content: '♥'; position: absolute; font-size: 30px; color: var(--primary); opacity: 0.5; }
+    .poetry-box::before { top: 10px; left: 10px; } .poetry-box::after { bottom: 10px; right: 10px; }
 
+    /* Timer */
     .timer-box {
-        font-size: 18px; font-weight: bold; color: #555; background: #fff;
-        padding: 15px; border: 2px dashed var(--primary-color); border-radius: 10px;
+        font-size: 1.3rem; font-weight: 600; color: var(--primary);
+        background: #fff; padding: 20px; border-radius: 15px;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
     }
 
-    .slider-container { margin: 20px 0; }
-    input[type=range] { width: 100%; accent-color: var(--primary-color); }
-    #mood-text { font-weight: bold; margin-top: 10px; color: var(--primary-color); }
+    /* Slider */
+    .slider-container { margin: 30px 0; }
+    input[type=range] { width: 100%; height: 8px; border-radius: 5px; background: #ddd; outline: none; accent-color: var(--secondary); }
+    #mood-text { font-weight: bold; margin-top: 15px; color: var(--secondary); font-size: 1.2rem;}
 
+    /* Chat */
     .chat-container {
-        background: var(--chat-bg); padding: 15px; border-radius: 15px;
-        height: 300px; overflow-y: auto; display: flex; flex-direction: column;
-        border: 1px solid #ddd;
+        background: #f0f2f5; padding: 20px; border-radius: 20px;
+        height: 350px; overflow-y: auto; display: flex; flex-direction: column;
     }
     .msg {
-        max-width: 80%; padding: 8px 12px; margin: 5px 0; border-radius: 10px;
-        font-size: 14px; position: relative; opacity: 0; transform: translateY(10px);
-        transition: all 0.5s ease;
+        max-width: 80%; padding: 12px 18px; margin: 8px 0; border-radius: 18px;
+        font-size: 15px; position: relative; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
     .msg.show { opacity: 1; transform: translateY(0); }
-    .sent { background: var(--sent-bg); align-self: flex-end; border-bottom-right-radius: 0; }
+    .sent { background: var(--sent-bg); align-self: flex-end; border-bottom-right-radius: 4px; color: #333;}
 
-    .jar-container { transition: transform 0.3s; }
-    .jar-container:active { transform: scale(0.95); }
-    .jar-icon { font-size: 60px; }
+    /* NEW PROMISE JAR UI */
+    .jar-container { transition: transform 0.3s; display: inline-block; }
+    .jar-container:hover { transform: rotate(5deg) scale(1.05); }
+    .jar-icon { font-size: 80px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
     .promise-card {
-        margin-top: 15px; padding: 15px; background: #fffbeb;
-        border: 1px solid #ffd700; border-radius: 10px; display: none; animation: fadeIn 0.5s;
+        margin-top: 25px; padding: 25px; background: #fff;
+        border-radius: 15px; display: none; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid var(--primary);
+        font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--text-dark);
     }
+    @keyframes popIn { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .gallery img { width: 100%; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-
-    .gift-box { font-size: 60px; animation: bounce 2s infinite; }
-    .coupon { display: none; background: #fff; border: 2px dashed #333; padding: 20px; margin-top: 20px; }
-
-    .whatsapp-btn {
-        position: fixed; bottom: 20px; right: 20px;
-        background: #25d366; color: white; padding: 12px 20px;
-        border-radius: 50px; text-decoration: none; font-weight: bold;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: none; z-index: 1000;
+    /* NEW POLAROID GALLERY */
+    .gallery {
+        display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;
     }
+    .polaroid {
+        background: white; padding: 15px 15px 30px 15px;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.1); border-radius: 5px;
+        transition: all 0.4s ease; width: 220px;
+        transform: rotate(-3deg);
+    }
+    .polaroid:nth-child(even) { transform: rotate(3deg) translateY(10px); }
+    .polaroid:hover { transform: rotate(0deg) scale(1.1); z-index: 10; box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+    .polaroid img { width: 100%; height: 220px; object-fit: cover; border-radius: 3px; }
 
-    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-    @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    /* Coupon & Button */
+    .gift-box { font-size: 80px; animation: bounce 2.5s infinite; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); transition: transform 0.3s;}
+    .gift-box:hover { transform: scale(1.1); }
+    .coupon { display: none; background: #fff; border: 3px dashed var(--primary); padding: 30px; margin-top: 30px; border-radius: 15px;}
     
-    .confetti { position: fixed; width: 10px; height: 10px; background: red; top: -10px; z-index: 999; animation: fall 3s linear infinite; }
-    @keyframes fall { to { top: 100vh; transform: rotate(360deg); } }
+    .whatsapp-btn {
+        position: fixed; bottom: 30px; right: 30px;
+        background: #25d366; color: white; padding: 15px 30px;
+        border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem;
+        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); display: none; z-index: 1000;
+        transition: transform 0.3s;
+    }
+    .whatsapp-btn:hover { transform: scale(1.1); }
 
+    .confetti { position: fixed; width: 12px; height: 12px; top: -10px; z-index: 9999; animation: fall linear forwards; }
+    @keyframes fall { to { top: 105vh; transform: rotate(720deg); } }
 </style>
 </head>
 <body>
@@ -143,16 +174,16 @@
     <div class="bg-hearts" id="bg-hearts"></div>
 
     <div id="start-overlay">
-        <h1>For Vaishnavi ❤️</h1>
-        <p>Please turn up your volume.</p>
-        <button id="start-btn" onclick="startExperience()">Open My Heart</button>
+        <h1>For Vaishnavi</h1>
+        <p>Put on your headphones for the best experience. 🎧</p>
+        <button id="start-btn" onclick="startExperience()">Enter My World ❤️</button>
     </div>
 
     <div id="main-content" style="display:none;">
         
         <section>
-            <h1>I'm Sorry.</h1>
-            <p>I messed up, and I want to fix it.</p>
+            <h1>I'm So Sorry, Vaishnavi.</h1>
+            <p>My words were wrong, but my heart is still yours.</p>
             
             <div class="slider-container">
                 <p>How angry are you right now?</p>
@@ -162,17 +193,18 @@
         </section>
 
         <section>
-            <h2>⏳ Time Since 2nd Aug 2025</h2>
+            <h2>⏳ The Countdown</h2>
+            <p>Until our fresh start...</p>
             <div class="timer-box" id="timer">Calculating...</div>
         </section>
 
         <section>
-            <h2>💬 Just Listen Once?</h2>
+            <h2>💬 Please Read This Once</h2>
             <div class="chat-container" id="chat-box"></div>
         </section>
 
         <section>
-            <h2>😔 My Confession</h2>
+            <h2>😔 My Honest Confession</h2>
             <div class="text-content">
                 <p>My Dear Vaishnavi,</p>
                 <p>I know maine galti ki hai aur main apni saari galti accept karta hoon. Please Vaishnavi mujhe maaf kar do. Mera intention kabhi bhi tumhe hurt karna nahi tha.</p>
@@ -196,7 +228,7 @@
         </section>
 
         <section>
-            <h2>🌹 For You</h2>
+            <h2>🌹 Written For You</h2>
             <div class="poetry-box">
                 I miss the smile upon your face,<br>
                 I miss your warm and loving embrace.<br>
@@ -217,7 +249,7 @@
 
         <section>
             <h2>🏺 The Promise Jar</h2>
-            <p>Tap the jar to see my promises to you.</p>
+            <p>Tap the jar to connect with my promises.</p>
             <div class="jar-container" onclick="showPromise()">
                 <div class="jar-icon">🏺</div>
             </div>
@@ -225,17 +257,25 @@
         </section>
 
         <section>
-            <h2>📸 Us</h2>
+            <h2>📸 Our Memories</h2>
             <div class="gallery">
-                <img src="https://i.ibb.co/WvZCqXrJ/f050c675-8b43-4e06-be87-a6d71669c771-d146cfb7-252f-48cb-ba3c-9da826f0f173-2.jpg">
-                <img src="https://i.ibb.co/xbLT1BP/Screenshot-20251227-063846-Photos.jpg">
-                <img src="https://i.ibb.co/Txmdv3Kr/Screenshot-20251227-145012-Gallery.jpg">
-                <img src="https://i.ibb.co/RkN4dd2P/Screenshot-20251227-145038-Gallery.jpg">
+                <div class="polaroid">
+                    <img src="https://i.ibb.co/WvZCqXrJ/f050c675-8b43-4e06-be87-a6d71669c771-d146cfb7-252f-48cb-ba3c-9da826f0f173-2.jpg" alt="Us">
+                </div>
+                <div class="polaroid">
+                    <img src="https://i.ibb.co/xbLT1BP/Screenshot-20251227-063846-Photos.jpg" alt="Us">
+                </div>
+                <div class="polaroid">
+                    <img src="https://i.ibb.co/Txmdv3Kr/Screenshot-20251227-145012-Gallery.jpg" alt="Us">
+                </div>
+                <div class="polaroid">
+                    <img src="https://i.ibb.co/RkN4dd2P/Screenshot-20251227-145038-Gallery.jpg" alt="Us">
+                </div>
             </div>
         </section>
 
         <section>
-            <h2>🎁 Peace Offering</h2>
+            <h2>🎁 A Peace Offering</h2>
             <div class="gift-box" onclick="openCoupon()">🎁</div>
             <div class="coupon" id="coupon">
                 <h3>Coupon Code: LOVE2025</h3>
@@ -249,116 +289,142 @@
     </div>
 
     <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/23/audio_07b2a04654.mp3?filename=emotional-piano-113572.mp3" type="audio/mp3">
     </audio>
 
 <script>
+    // --- Scroll Animation Observer ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('section').forEach(section => {
+        observer.observe(section);
+    });
+
+    // --- Hearts Animation ---
     function createHearts() {
         const container = document.getElementById('bg-hearts');
-        for(let i=0; i<15; i++) {
+        for(let i=0; i<20; i++) {
             let heart = document.createElement('div');
-            heart.innerHTML = '❤️';
+            heart.innerHTML = '❤';
             heart.className = 'heart-bg';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            heart.style.fontSize = (Math.random() * 30 + 15) + 'px';
             container.appendChild(heart);
         }
     }
     createHearts();
 
+    // --- Start ---
     function startExperience() {
-        document.getElementById('start-overlay').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-        document.getElementById('bg-music').volume = 0.5;
-        document.getElementById('bg-music').play();
+        document.getElementById('start-overlay').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('start-overlay').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            // Trigger scroll animation for first sections
+            document.querySelectorAll('section').forEach(sec => {
+                 if(sec.getBoundingClientRect().top < window.innerHeight) sec.classList.add('visible');
+            });
+        }, 500);
+        
+        const music = document.getElementById('bg-music');
+        music.volume = 0.4;
+        music.play().catch(error => console.log("Audio play failed due to browser policy"));
         startChat();
     }
 
+    // --- Timer (Aug 2, 2025) ---
     const startDate = new Date(2025, 7, 2); 
-    
     setInterval(() => {
         const now = new Date();
         const diff = now - startDate;
-        
         if (diff < 0) {
-            document.getElementById("timer").innerText = "Timer starts on Aug 2, 2025";
+            document.getElementById("timer").innerText = "Waiting for August 2, 2025...";
             return;
         }
-
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        
-        document.getElementById("timer").innerText = 
-            `${days} Days, ${hours} Hours, ${minutes} Minutes`;
+        document.getElementById("timer").innerText = `${days} Days, ${hours} Hours, ${minutes} Min`;
     }, 1000);
 
+    // --- Mood Slider ---
     function updateMood() {
         const val = document.getElementById('moodRange').value;
         const text = document.getElementById('mood-text');
         if(val > 80) text.innerText = "😡 I am furious!";
-        else if(val > 50) text.innerText = "😠 I am still upset.";
-        else text.innerText = "💖 I might forgive you...";
+        else if(val > 50) { text.innerText = "😠 I am still upset."; text.style.color = "#ff8fa3"; }
+        else { text.innerText = "💖 I might forgive you..."; text.style.color = "#d4af37"; }
     }
 
+    // --- Chat ---
     const messages = [
-        { text: "Vaishnavi...", type: "sent", delay: 500 },
-        { text: "Please bas poora page end tak padh lo.", type: "sent", delay: 2000 },
-        { text: "Uske baad decision tumhara hai.", type: "sent", delay: 4000 }
+        { text: "Vaishnavi...", delay: 500 },
+        { text: "I know you're hurt.", delay: 2500 },
+        { text: "Please just scroll down and read everything.", delay: 4500 },
+        { text: "It's all I ask.", delay: 6500 }
     ];
     function startChat() {
         const chatBox = document.getElementById('chat-box');
         let index = 0;
         function addMessage() {
             if (index < messages.length) {
-                const msgData = messages[index];
                 const msgDiv = document.createElement('div');
-                msgDiv.className = `msg ${msgData.type}`;
-                msgDiv.innerHTML = `${msgData.text}`;
+                msgDiv.className = `msg sent`;
+                msgDiv.innerHTML = `${messages[index].text}`;
                 chatBox.appendChild(msgDiv);
-                setTimeout(() => msgDiv.classList.add('show'), 100);
+                setTimeout(() => msgDiv.classList.add('show'), 50);
                 chatBox.scrollTop = chatBox.scrollHeight;
                 index++;
-                if (index < messages.length) setTimeout(addMessage, msgData.delay);
-                else setTimeout(() => document.getElementById('wa-btn').style.display = 'block', 2000);
+                if (index < messages.length) setTimeout(addMessage, messages[index-1].delay);
+                else setTimeout(() => document.getElementById('wa-btn').style.display = 'block', 3000);
             }
         }
         addMessage();
     }
 
+    // --- Promise Jar (Improved Interaction) ---
     const promises = [
         "I promise to listen more and speak less.",
-        "I promise to never take you for granted.",
-        "I promise to always bring your favorite Momos.",
-        "I promise to focus on fixing problems, not winning arguments.",
-        "I promise to never let you feel lonely.",
+        "I promise to never take you for granted again.",
+        "I promise unlimited Momos dates.",
+        "I promise to focus on 'Us' vs the problem.",
+        "I promise to make you feel secure and loved.",
         "I promise to support your dreams, always."
     ];
     function showPromise() {
         const display = document.getElementById('promise-display');
+        // Reset animation
+        display.style.display = 'none';
+        display.offsetHeight; /* trigger reflow */
+        
         const randomPromise = promises[Math.floor(Math.random() * promises.length)];
         display.style.display = 'block';
         display.innerText = "✨ " + randomPromise;
-        triggerConfetti(5);
+        triggerConfetti(10);
     }
 
+    // --- Coupon & Confetti ---
     function openCoupon() {
         document.getElementById('coupon').style.display = 'block';
-        triggerConfetti(50);
+        triggerConfetti(60);
     }
     function triggerConfetti(count) {
         for(let i=0; i<count; i++) {
             let c = document.createElement("div");
             c.className = "confetti";
             c.style.left = Math.random() * 100 + "vw";
-            c.style.background = ["#ff0", "#f00", "#0f0", "#00f"][Math.floor(Math.random()*4)];
-            c.style.animationDuration = (Math.random() * 2 + 2) + "s";
+            c.style.background = ["#d4af37", "#ff8fa3", "#fff", "gold"][Math.floor(Math.random()*4)];
+            c.style.animationDuration = (Math.random() * 3 + 2) + "s";
             document.body.appendChild(c);
-            setTimeout(() => c.remove(), 4000);
+            setTimeout(() => c.remove(), 5000);
         }
     }
 </script>
-
 </body>
 </html>
