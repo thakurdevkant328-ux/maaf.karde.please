@@ -93,14 +93,15 @@
     .highlight { background: #fff3cd; padding: 2px 6px; border-radius: 4px; font-weight: 600; color: #333; }
 
     .poetry-box {
-        font-family: 'Dancing Script', cursive; font-size: 1.6rem;
-        line-height: 1.5; color: #880e4f;
+        font-family: 'Dancing Script', cursive; font-size: 1.5rem;
+        line-height: 1.6; color: #880e4f;
         background: radial-gradient(circle, #fff0f3, #fff);
         padding: 30px; border: 1px dashed var(--primary); border-radius: 15px;
+        text-align: left; /* Aligns poetry better */
     }
     .signature {
-        display: block; text-align: right; margin-top: 15px;
-        font-weight: bold; color: var(--gold);
+        display: block; text-align: right; margin-top: 20px;
+        font-weight: bold; color: var(--gold); font-size: 1.4rem;
     }
 
     /* Timer */
@@ -242,13 +243,19 @@
         <section>
             <h2>🌹 For You</h2>
             <div class="poetry-box">
-                "I miss the smile upon your face,<br>
-                I miss your warm and loving embrace.<br>
-                Please forget the fights we had,<br>
-                Being apart makes me so sad.<br><br>
-                Vaishnavi, you are my heart and soul,<br>
-                Only you can make me whole." ❤️
-                <span class="signature">- urs devulla</span>
+                Vaishnavi, even though we’ve walked apart,<br>
+                You still hold the biggest piece of my heart.<br>
+                The silence now is loud and clear,<br>
+                Missing the voice I used to hear.<br><br>
+                Every memory plays like a favorite song,<br>
+                Wondering where exactly we went wrong.<br>
+                But even in this distance, true and deep,<br>
+                You are the promise I wanted to keep.<br><br>
+                If our paths never cross again, my dear,<br>
+                Know that my love for you was sincere.<br>
+                But if fate allows one more chance to be,<br>
+                I’ll wait for you, endlessly.
+                <span class="signature">- Urs Devulla</span>
             </div>
         </section>
 
@@ -347,7 +354,7 @@
     }
     createHearts();
 
-    // --- 4. TIMER (Running Properly) ---
+    // --- 4. TIMER FIX (Running Properly) ---
     // Start Date: August 2, 2025
     const startDate = new Date("August 2, 2025 00:00:00").getTime();
     
