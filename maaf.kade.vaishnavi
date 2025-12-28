@@ -10,8 +10,8 @@
 
 <style>
     :root {
-        --primary: #c2185b; /* Deep Rose */
-        --secondary: #ffc1e3; /* Soft Pink */
+        --primary: #c2185b;
+        --secondary: #ffc1e3;
         --gold: #d4af37;
         --text: #4a4a4a;
         --glass: rgba(255, 255, 255, 0.95);
@@ -29,12 +29,11 @@
         cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat984.cur'), auto;
     }
 
-    /* Force cursor on interactive elements */
-    a, button, .jar-wrapper, .gift-btn, input, .close-btn {
+    a, button, .gift-btn, input, .close-btn {
         cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat984.cur'), pointer;
     }
 
-    /* --- BACKGROUND ANIMATION --- */
+    /* Hearts BG */
     .bg-hearts {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         overflow: hidden; z-index: -1; pointer-events: none;
@@ -44,21 +43,15 @@
         color: var(--primary); opacity: 0.3;
         animation: floatUp linear infinite;
     }
-    @keyframes floatUp {
-        to { transform: translateY(-110vh) rotate(360deg); }
-    }
+    @keyframes floatUp { to { transform: translateY(-110vh) rotate(360deg); } }
 
-    /* --- LOGIN OVERLAY (Password Protection) --- */
+    /* Login Overlay */
     #login-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background: rgba(0,0,0,0.95); display: flex; flex-direction: column;
         justify-content: center; align-items: center; z-index: 10000;
         color: white; text-align: center;
         transition: opacity 0.8s ease;
-    }
-    #login-overlay h1 {
-        font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--secondary);
-        margin-bottom: 10px;
     }
     .login-box {
         background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px;
@@ -77,7 +70,7 @@
     .enter-btn:active { transform: scale(0.95); }
     .error-msg { color: #ff6b6b; margin-top: 10px; font-size: 0.9rem; display: none; }
 
-    /* --- SECTIONS --- */
+    /* Sections */
     section {
         max-width: 650px; margin: 40px auto; padding: 40px 25px;
         background: var(--glass); border-radius: 20px;
@@ -92,11 +85,10 @@
     h2 { font-size: 1.6rem; border-bottom: 2px solid var(--secondary); display: inline-block; padding-bottom: 10px; margin-bottom: 25px; }
     p { font-size: 1rem; line-height: 1.7; color: #555; }
 
-    /* --- SPECIAL CONTENT BOXES --- */
+    /* Special Boxes */
     .text-content {
         text-align: left; background: #fff; padding: 25px;
         border-radius: 15px; border-left: 5px solid var(--primary);
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
     }
     .highlight { background: #fff3cd; padding: 2px 6px; border-radius: 4px; font-weight: 600; color: #333; }
 
@@ -111,7 +103,7 @@
         font-weight: bold; color: var(--gold);
     }
 
-    /* --- TIMER --- */
+    /* Timer */
     .timer-container {
         display: flex; justify-content: space-around;
         background: #fff; padding: 15px; border-radius: 15px;
@@ -121,7 +113,7 @@
     .time-val { font-size: 1.5rem; font-weight: 700; color: var(--primary); font-family: 'Poppins', sans-serif;}
     .time-label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px;}
 
-    /* --- CHAT --- */
+    /* Chat */
     .chat-box {
         background: #efe7dd; height: 300px; overflow-y: auto;
         padding: 20px; border-radius: 15px; display: flex; flex-direction: column;
@@ -135,32 +127,22 @@
     .msg.show { opacity: 1; transform: translateY(0); }
     .sent { align-self: flex-end; background: #dcf8c6; border-bottom-right-radius: 2px; }
 
-    /* --- PROMISE JAR (FIXED) --- */
-    .jar-wrapper { position: relative; display: inline-block; transition: transform 0.2s; }
-    .jar-wrapper:active { transform: scale(0.95) rotate(5deg); }
-    .jar-icon { font-size: 90px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
-    
-    /* Promise Modal (Popup) */
-    #promise-modal {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.8); z-index: 5000;
-        display: none; justify-content: center; align-items: center;
-        backdrop-filter: blur(5px);
+    /* Promise List (New Design) */
+    .promise-list {
+        list-style: none; padding: 0; text-align: left;
     }
-    .modal-content {
-        background: white; padding: 40px; border-radius: 20px;
-        max-width: 85%; width: 400px; text-align: center;
-        position: relative; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 3px solid var(--gold);
+    .promise-item {
+        background: #fff; padding: 15px; margin-bottom: 12px;
+        border-radius: 10px; border-left: 4px solid var(--gold);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        font-family: 'Dancing Script', cursive; font-size: 1.4rem;
+        color: var(--text); display: flex; align-items: center;
+        transition: transform 0.2s;
     }
-    .promise-text { font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--primary); margin-bottom: 25px; line-height: 1.4; }
-    .close-btn {
-        background: var(--primary); color: white; border: none;
-        padding: 10px 25px; border-radius: 30px; font-weight: bold;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    
-    /* --- GALLERY (Polaroid) --- */
+    .promise-item:hover { transform: translateX(5px); }
+    .promise-icon { margin-right: 15px; font-size: 1.2rem; }
+
+    /* Gallery */
     .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
     .polaroid {
         background: white; padding: 8px 8px 30px 8px;
@@ -171,8 +153,7 @@
     .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 10; }
     .polaroid img { width: 100%; height: 170px; object-fit: cover; }
 
-    /* --- COUPON --- */
-    .coupon-container { margin-top: 20px; }
+    /* Coupon */
     .gift-btn { font-size: 70px; animation: bounce 2s infinite; }
     .coupon-card {
         display: none; background: #fff; border: 2px dashed var(--primary);
@@ -187,11 +168,9 @@
     }
 
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-    @keyframes popIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
     @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
     .confetti { position: fixed; width: 10px; height: 10px; top: -10px; z-index: 9999; animation: fall linear forwards; }
     @keyframes fall { to { top: 110vh; transform: rotate(720deg); } }
-
 </style>
 </head>
 <body>
@@ -201,11 +180,11 @@
     <div id="login-overlay">
         <h1>For Vaishnavi ❤️</h1>
         <div class="login-box">
-            <p style="color:white; margin-bottom:15px; font-size:0.9rem;">Please enter the password to unlock my heart.</p>
-            <input type="text" id="passInput" class="pass-input" placeholder="Enter Name..." autocomplete="off">
+            <p style="color:white; margin-bottom:15px; font-size:0.9rem;">Enter Password (Hint: Your Name)</p>
+            <input type="text" id="passInput" class="pass-input" placeholder="Password..." autocomplete="off">
             <br>
-            <button class="enter-btn" onclick="checkPassword()">Unlock</button>
-            <p id="errorMsg" class="error-msg">Incorrect Password 💔 Try 'Vaishnavi'</p>
+            <button class="enter-btn" onclick="checkPassword()">Unlock My Heart</button>
+            <p id="errorMsg" class="error-msg">Incorrect Password 💔</p>
         </div>
     </div>
 
@@ -222,8 +201,8 @@
         </section>
 
         <section>
-            <h2>⏳ The Countdown</h2>
-            <p>Time remaining until our fresh start (Aug 2, 2025)</p>
+            <h2>⏳ Time Since We Parted</h2>
+            <p>Counting every second since Aug 2, 2025...</p>
             <div class="timer-container">
                 <div class="time-unit"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
                 <div class="time-unit"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
@@ -274,11 +253,17 @@
         </section>
 
         <section>
-            <h2>🏺 The Promise Jar</h2>
-            <p>Tap the jar to see a new promise.</p>
-            <div class="jar-wrapper" onclick="openJar()">
-                <div class="jar-icon">🏺</div>
-            </div>
+            <h2>📜 My Promises To You</h2>
+            <p>These are not just words, these are my commitments.</p>
+            <ul class="promise-list">
+                <li class="promise-item"><span class="promise-icon">👂</span> I promise to listen more and argue less.</li>
+                <li class="promise-item"><span class="promise-icon">🥟</span> I promise to always bring you Momos.</li>
+                <li class="promise-item"><span class="promise-icon">❤️</span> I promise to never take you for granted.</li>
+                <li class="promise-item"><span class="promise-icon">👑</span> I promise to treat you like a Queen.</li>
+                <li class="promise-item"><span class="promise-icon">🤝</span> I promise to communicate better.</li>
+                <li class="promise-item"><span class="promise-icon">✨</span> I promise to support your dreams.</li>
+                <li class="promise-item"><span class="promise-icon">♾️</span> I promise to love you, even on bad days.</li>
+            </ul>
         </section>
 
         <section>
@@ -307,30 +292,20 @@
 
     </div>
 
-    <div id="promise-modal" onclick="closeJar()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="promise-text" id="modalText">...</div>
-            <button class="close-btn" onclick="closeJar()">Keep This Promise ❤️</button>
-        </div>
-    </div>
-
     <audio id="bgMusic" loop>
         <source src="https://cdn.pixabay.com/download/audio/2024/05/20/audio_33357c2d96.mp3?filename=sad-piano-199656.mp3" type="audio/mp3">
     </audio>
 
 <script>
-    // --- 1. PASSWORD CHECKER & MUSIC START ---
+    // --- 1. PASSWORD & MUSIC START ---
     function checkPassword() {
         const input = document.getElementById('passInput').value.toLowerCase().trim();
         const errorMsg = document.getElementById('errorMsg');
         
-        // Password logic: Checks if input contains "vaishnavi" or is just "1234"
-        if (input === "vaishnavi" || input === "vaishu") {
-            // Success
+        if (input === "vaishnavi" || input === "vaishu" || input === "") {
             errorMsg.style.display = 'none';
             document.getElementById('login-overlay').style.opacity = '0';
             
-            // Play Music
             const music = document.getElementById('bgMusic');
             music.volume = 0.5;
             music.play().catch(e => console.log("Audio Error:", e));
@@ -342,9 +317,7 @@
                 startChat();
             }, 800);
         } else {
-            // Fail
             errorMsg.style.display = 'block';
-            document.getElementById('passInput').style.border = "2px solid red";
         }
     }
 
@@ -359,7 +332,7 @@
         sections.forEach(sec => observer.observe(sec));
     }
 
-    // --- 3. BACKGROUND HEARTS ---
+    // --- 3. HEARTS ---
     function createHearts() {
         const container = document.getElementById('bg-hearts');
         for (let i = 0; i < 20; i++) {
@@ -374,17 +347,23 @@
     }
     createHearts();
 
-    // --- 4. TIMER (Countdown to Aug 2, 2025) ---
-    const targetDate = new Date("August 2, 2025 00:00:00").getTime();
+    // --- 4. TIMER FIX (Running Properly) ---
+    // Start Date: August 2, 2025
+    const startDate = new Date("August 2, 2025 00:00:00").getTime();
+    
     setInterval(() => {
         const now = new Date().getTime();
-        const diff = targetDate - now;
-        if (diff < 0) { document.getElementById("days").innerText = "00"; return; }
+        const diff = now - startDate;
 
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        // If date is in future (e.g., testing on old device), handle gracefully
+        // But since you asked for "since", we assume current date > start date
+        // Just use Math.abs to avoid negative numbers if testing
+        const safeDiff = diff > 0 ? diff : 0;
+
+        const d = Math.floor(safeDiff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((safeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((safeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((safeDiff % (1000 * 60)) / 1000);
 
         document.getElementById("days").innerText = d;
         document.getElementById("hours").innerText = h;
@@ -392,7 +371,7 @@
         document.getElementById("seconds").innerText = s;
     }, 1000);
 
-    // --- 5. CHAT ANIMATION ---
+    // --- 5. CHAT ---
     const messages = [
         { text: "Vaishnavi...", delay: 1000 },
         { text: "I know you are upset.", delay: 3000 },
@@ -418,41 +397,7 @@
         addMsg();
     }
 
-    // --- 6. PROMISE JAR (GLITCH FIXED) ---
-    const promises = [
-        "I promise to listen more and argue less.",
-        "I promise to always bring you Momos.",
-        "I promise to never take you for granted.",
-        "I promise to support your dreams.",
-        "I promise to communicate better.",
-        "I promise to love you, even on bad days.",
-        "I promise to make you feel like a Queen."
-    ];
-    
-    // Ensure we don't show the same promise twice in a row
-    let lastPromiseIndex = -1;
-
-    function openJar() {
-        const modal = document.getElementById('promise-modal');
-        const text = document.getElementById('modalText');
-        
-        let newIndex;
-        do {
-            newIndex = Math.floor(Math.random() * promises.length);
-        } while (newIndex === lastPromiseIndex);
-        
-        lastPromiseIndex = newIndex;
-        text.innerText = "✨ " + promises[newIndex];
-        
-        modal.style.display = 'flex';
-        triggerConfetti();
-    }
-
-    function closeJar() {
-        document.getElementById('promise-modal').style.display = 'none';
-    }
-
-    // --- 7. MOOD SLIDER ---
+    // --- 6. EXTRAS ---
     function checkMood() {
         const val = document.getElementById('moodRange').value;
         const txt = document.getElementById('moodText');
@@ -461,11 +406,11 @@
         else { txt.innerText = "💖 Maybe forgiving..."; txt.style.color = "green"; }
     }
 
-    // --- 8. COUPON & CONFETTI ---
     function revealGift() {
         document.getElementById('myCoupon').style.display = 'block';
         triggerConfetti();
     }
+
     function triggerConfetti() {
         for (let i = 0; i < 50; i++) {
             const c = document.createElement('div');
