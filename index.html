@@ -3,213 +3,247 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>For Vaishnavi ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@700&family=Parisienne&display=swap" rel="stylesheet">
+<title>For My Vaishnavi ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
     :root {
-        /* New Premium Color Palette */
-        --primary: #d4af37; /* Gold */
-        --secondary: #ff8fa3; /* Soft Pink */
-        --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #fff5e6 100%);
-        --glass-bg: rgba(255, 255, 255, 0.85);
-        --text-dark: #4a4a4a;
-        --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+        --primary: #c2185b; /* Deep Rose */
+        --secondary: #ffc1e3; /* Soft Pink */
+        --gold: #d4af37;
+        --text: #4a4a4a;
+        --glass: rgba(255, 255, 255, 0.95);
+        --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffe6e9 100%);
     }
 
-    /* --- 1. BASE STYLES & CURSOR --- */
+    * { box-sizing: border-box; }
+
     body {
         margin: 0;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Poppins', sans-serif;
         background: var(--bg-gradient);
-        color: var(--text-dark);
+        color: var(--text);
         overflow-x: hidden;
-        /* Cat Paw Cursor */
-        cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat984.cur'), auto; 
+        cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat984.cur'), auto;
     }
 
-    a, button, .jar-container, .gift-box, input[type=range], .polaroid {
+    /* Force cursor on interactive elements */
+    a, button, .jar-wrapper, .gift-btn, input, .close-btn {
         cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat984.cur'), pointer;
     }
 
-    /* --- 2. FLOATING HEARTS (Improved) --- */
+    /* --- BACKGROUND ANIMATION --- */
     .bg-hearts {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         overflow: hidden; z-index: -1; pointer-events: none;
     }
     .heart-bg {
-        position: absolute; bottom: -100px;
-        color: var(--secondary); opacity: 0.4;
+        position: absolute; bottom: -50px;
+        color: var(--primary); opacity: 0.3;
         animation: floatUp linear infinite;
     }
     @keyframes floatUp {
-        to { transform: translateY(-120vh) rotate(360deg); }
+        to { transform: translateY(-110vh) rotate(360deg); }
     }
 
-    /* --- OVERLAY (Start Screen) --- */
-    #start-overlay {
+    /* --- LOGIN OVERLAY (Password Protection) --- */
+    #login-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.9);
-        display: flex; justify-content: center; align-items: center;
-        z-index: 9999; color: white; flex-direction: column; text-align: center;
+        background: rgba(0,0,0,0.95); display: flex; flex-direction: column;
+        justify-content: center; align-items: center; z-index: 10000;
+        color: white; text-align: center;
+        transition: opacity 0.8s ease;
     }
-    #start-overlay h1 { font-family: 'Parisienne', cursive; font-size: 3.5rem; color: var(--secondary); margin-bottom: 10px;}
-    #start-btn {
-        padding: 15px 40px; background: linear-gradient(45deg, var(--secondary), var(--primary));
-        border: none; color: white; font-size: 18px; border-radius: 50px;
-        margin-top: 30px; box-shadow: 0 5px 15px rgba(255, 143, 163, 0.4);
-        transition: transform 0.3s;
+    #login-overlay h1 {
+        font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--secondary);
+        margin-bottom: 10px;
     }
-    #start-btn:hover { transform: scale(1.05); }
+    .login-box {
+        background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px;
+        backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);
+    }
+    .pass-input {
+        padding: 12px 20px; border-radius: 30px; border: none; outline: none;
+        width: 250px; font-size: 1rem; text-align: center; margin-bottom: 15px;
+        font-family: 'Poppins', sans-serif;
+    }
+    .enter-btn {
+        padding: 12px 35px; background: var(--primary); color: white;
+        border: none; border-radius: 50px; font-size: 1rem; font-weight: 600;
+        box-shadow: 0 0 15px rgba(194, 24, 91, 0.5); transition: transform 0.2s;
+    }
+    .enter-btn:active { transform: scale(0.95); }
+    .error-msg { color: #ff6b6b; margin-top: 10px; font-size: 0.9rem; display: none; }
 
-    /* --- SECTIONS (Glassmorphism Effect) --- */
+    /* --- SECTIONS --- */
     section {
-        padding: 50px 30px; max-width: 700px; margin: 40px auto;
-        text-align: center;
-        background: var(--glass-bg);
-        backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-        border-radius: 25px;
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; /* For scroll animation */
+        max-width: 650px; margin: 40px auto; padding: 40px 25px;
+        background: var(--glass); border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        text-align: center; border: 1px solid white;
+        opacity: 0; transform: translateY(30px); transition: all 0.8s ease;
     }
     section.visible { opacity: 1; transform: translateY(0); }
 
-    h1 { font-family: 'Parisienne', cursive; color: var(--secondary); font-size: 3rem; margin-bottom: 10px; }
-    h2 { font-family: 'Montserrat', sans-serif; font-weight: 600; color: #333; letter-spacing: 1px; position: relative; display: inline-block; margin-bottom: 30px;}
-    h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: var(--primary); }
-    p { font-size: 1.1rem; line-height: 1.8; color: #555; }
+    h1, h2 { font-family: 'Playfair Display', serif; color: var(--primary); margin-top: 0; }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.6rem; border-bottom: 2px solid var(--secondary); display: inline-block; padding-bottom: 10px; margin-bottom: 25px; }
+    p { font-size: 1rem; line-height: 1.7; color: #555; }
 
-    /* --- COMPONENTS --- */
-    
-    /* Text Boxes (Confession/Apology) */
+    /* --- SPECIAL CONTENT BOXES --- */
     .text-content {
-        text-align: left; background: #fff; padding: 30px;
-        border-radius: 15px; border-left: 4px solid var(--primary);
+        text-align: left; background: #fff; padding: 25px;
+        border-radius: 15px; border-left: 5px solid var(--primary);
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
+    }
+    .highlight { background: #fff3cd; padding: 2px 6px; border-radius: 4px; font-weight: 600; color: #333; }
+
+    .poetry-box {
+        font-family: 'Dancing Script', cursive; font-size: 1.6rem;
+        line-height: 1.5; color: #880e4f;
+        background: radial-gradient(circle, #fff0f3, #fff);
+        padding: 30px; border: 1px dashed var(--primary); border-radius: 15px;
+    }
+    .signature {
+        display: block; text-align: right; margin-top: 15px;
+        font-weight: bold; color: var(--gold);
+    }
+
+    /* --- TIMER --- */
+    .timer-container {
+        display: flex; justify-content: space-around;
+        background: #fff; padding: 15px; border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
-    .highlight { background-color: #fff0c4; padding: 2px 5px; border-radius: 4px; font-weight: 600; color: #333;}
+    .time-unit { display: flex; flex-direction: column; }
+    .time-val { font-size: 1.5rem; font-weight: 700; color: var(--primary); font-family: 'Poppins', sans-serif;}
+    .time-label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px;}
 
-    /* Poetry */
-    .poetry-box {
-        font-family: 'Dancing Script', cursive; font-size: 1.8rem;
-        line-height: 1.6; color: #d63384;
-        background: linear-gradient(to right, #fff0f3, #fff);
-        padding: 40px; border-radius: 15px;
-        position: relative;
-    }
-    .poetry-box::before, .poetry-box::after { content: '♥'; position: absolute; font-size: 30px; color: var(--primary); opacity: 0.5; }
-    .poetry-box::before { top: 10px; left: 10px; } .poetry-box::after { bottom: 10px; right: 10px; }
-
-    /* Timer */
-    .timer-box {
-        font-size: 1.3rem; font-weight: 600; color: var(--primary);
-        background: #fff; padding: 20px; border-radius: 15px;
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-    }
-
-    /* Slider */
-    .slider-container { margin: 30px 0; }
-    input[type=range] { width: 100%; height: 8px; border-radius: 5px; background: #ddd; outline: none; accent-color: var(--secondary); }
-    #mood-text { font-weight: bold; margin-top: 15px; color: var(--secondary); font-size: 1.2rem;}
-
-    /* Chat */
-    .chat-container {
-        background: #f0f2f5; padding: 20px; border-radius: 20px;
-        height: 350px; overflow-y: auto; display: flex; flex-direction: column;
+    /* --- CHAT --- */
+    .chat-box {
+        background: #efe7dd; height: 300px; overflow-y: auto;
+        padding: 20px; border-radius: 15px; display: flex; flex-direction: column;
+        border: 4px solid #fff;
     }
     .msg {
-        max-width: 80%; padding: 12px 18px; margin: 8px 0; border-radius: 18px;
-        font-size: 15px; position: relative; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        max-width: 80%; padding: 10px 15px; margin: 8px 0; border-radius: 15px;
+        font-size: 0.9rem; position: relative; opacity: 0; transform: translateY(10px);
+        transition: 0.5s; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
     .msg.show { opacity: 1; transform: translateY(0); }
-    .sent { background: var(--sent-bg); align-self: flex-end; border-bottom-right-radius: 4px; color: #333;}
+    .sent { align-self: flex-end; background: #dcf8c6; border-bottom-right-radius: 2px; }
 
-    /* NEW PROMISE JAR UI */
-    .jar-container { transition: transform 0.3s; display: inline-block; }
-    .jar-container:hover { transform: rotate(5deg) scale(1.05); }
-    .jar-icon { font-size: 80px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
-    .promise-card {
-        margin-top: 25px; padding: 25px; background: #fff;
-        border-radius: 15px; display: none; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid var(--primary);
-        font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--text-dark);
-    }
-    @keyframes popIn { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-
-    /* NEW POLAROID GALLERY */
-    .gallery {
-        display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;
-    }
-    .polaroid {
-        background: white; padding: 15px 15px 30px 15px;
-        box-shadow: 0 8px 15px rgba(0,0,0,0.1); border-radius: 5px;
-        transition: all 0.4s ease; width: 220px;
-        transform: rotate(-3deg);
-    }
-    .polaroid:nth-child(even) { transform: rotate(3deg) translateY(10px); }
-    .polaroid:hover { transform: rotate(0deg) scale(1.1); z-index: 10; box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
-    .polaroid img { width: 100%; height: 220px; object-fit: cover; border-radius: 3px; }
-
-    /* Coupon & Button */
-    .gift-box { font-size: 80px; animation: bounce 2.5s infinite; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); transition: transform 0.3s;}
-    .gift-box:hover { transform: scale(1.1); }
-    .coupon { display: none; background: #fff; border: 3px dashed var(--primary); padding: 30px; margin-top: 30px; border-radius: 15px;}
+    /* --- PROMISE JAR (FIXED) --- */
+    .jar-wrapper { position: relative; display: inline-block; transition: transform 0.2s; }
+    .jar-wrapper:active { transform: scale(0.95) rotate(5deg); }
+    .jar-icon { font-size: 90px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
     
-    .whatsapp-btn {
-        position: fixed; bottom: 30px; right: 30px;
-        background: #25d366; color: white; padding: 15px 30px;
-        border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem;
-        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); display: none; z-index: 1000;
-        transition: transform 0.3s;
+    /* Promise Modal (Popup) */
+    #promise-modal {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8); z-index: 5000;
+        display: none; justify-content: center; align-items: center;
+        backdrop-filter: blur(5px);
     }
-    .whatsapp-btn:hover { transform: scale(1.1); }
+    .modal-content {
+        background: white; padding: 40px; border-radius: 20px;
+        max-width: 85%; width: 400px; text-align: center;
+        position: relative; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 3px solid var(--gold);
+    }
+    .promise-text { font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--primary); margin-bottom: 25px; line-height: 1.4; }
+    .close-btn {
+        background: var(--primary); color: white; border: none;
+        padding: 10px 25px; border-radius: 30px; font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    
+    /* --- GALLERY (Polaroid) --- */
+    .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+    .polaroid {
+        background: white; padding: 8px 8px 30px 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15); width: 45%; max-width: 170px;
+        transform: rotate(-3deg); transition: transform 0.3s;
+    }
+    .polaroid:nth-child(even) { transform: rotate(3deg); }
+    .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 10; }
+    .polaroid img { width: 100%; height: 170px; object-fit: cover; }
 
-    .confetti { position: fixed; width: 12px; height: 12px; top: -10px; z-index: 9999; animation: fall linear forwards; }
-    @keyframes fall { to { top: 105vh; transform: rotate(720deg); } }
+    /* --- COUPON --- */
+    .coupon-container { margin-top: 20px; }
+    .gift-btn { font-size: 70px; animation: bounce 2s infinite; }
+    .coupon-card {
+        display: none; background: #fff; border: 2px dashed var(--primary);
+        padding: 20px; margin-top: 20px; border-radius: 10px;
+    }
+
+    .wa-btn {
+        position: fixed; bottom: 20px; right: 20px;
+        background: #25d366; color: white; padding: 12px 20px;
+        border-radius: 50px; text-decoration: none; font-weight: 600;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 2000; display: none;
+    }
+
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    @keyframes popIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    .confetti { position: fixed; width: 10px; height: 10px; top: -10px; z-index: 9999; animation: fall linear forwards; }
+    @keyframes fall { to { top: 110vh; transform: rotate(720deg); } }
+
 </style>
 </head>
 <body>
 
     <div class="bg-hearts" id="bg-hearts"></div>
 
-    <div id="start-overlay">
-        <h1>For Vaishnavi</h1>
-        <p>Put on your headphones for the best experience. 🎧</p>
-        <button id="start-btn" onclick="startExperience()">Enter My World ❤️</button>
+    <div id="login-overlay">
+        <h1>For Vaishnavi ❤️</h1>
+        <div class="login-box">
+            <p style="color:white; margin-bottom:15px; font-size:0.9rem;">Please enter the password to unlock my heart.</p>
+            <input type="text" id="passInput" class="pass-input" placeholder="Enter Name..." autocomplete="off">
+            <br>
+            <button class="enter-btn" onclick="checkPassword()">Unlock</button>
+            <p id="errorMsg" class="error-msg">Incorrect Password 💔 Try 'Vaishnavi'</p>
+        </div>
     </div>
 
     <div id="main-content" style="display:none;">
-        
+
         <section>
-            <h1>I'm So Sorry, Vaishnavi.</h1>
-            <p>My words were wrong, but my heart is still yours.</p>
-            
-            <div class="slider-container">
-                <p>How angry are you right now?</p>
-                <input type="range" min="0" max="100" value="100" id="moodRange" oninput="updateMood()">
-                <div id="mood-text">😡 I am furious!</div>
+            <h1>I am Sorry.</h1>
+            <p>I know I messed up. Just hear me out?</p>
+            <div style="margin-top: 30px;">
+                <p style="margin-bottom:10px;">How angry are you?</p>
+                <input type="range" min="0" max="100" value="100" id="moodRange" style="width:100%; accent-color: var(--primary);" oninput="checkMood()">
+                <p id="moodText" style="font-weight:bold; color:var(--primary); margin-top:10px;">😡 Furious!</p>
             </div>
         </section>
 
         <section>
             <h2>⏳ The Countdown</h2>
-            <p>Until our fresh start...</p>
-            <div class="timer-box" id="timer">Calculating...</div>
+            <p>Time remaining until our fresh start (Aug 2, 2025)</p>
+            <div class="timer-container">
+                <div class="time-unit"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
+                <div class="time-unit"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
+                <div class="time-unit"><span class="time-val" id="minutes">00</span><span class="time-label">Mins</span></div>
+                <div class="time-unit"><span class="time-val" id="seconds">00</span><span class="time-label">Secs</span></div>
+            </div>
         </section>
 
         <section>
-            <h2>💬 Please Read This Once</h2>
-            <div class="chat-container" id="chat-box"></div>
+            <h2>💬 Just One Conversation</h2>
+            <div class="chat-box" id="chatBox"></div>
         </section>
 
         <section>
-            <h2>😔 My Honest Confession</h2>
+            <h2>😔 My Confession</h2>
             <div class="text-content">
                 <p>My Dear Vaishnavi,</p>
-                <p>I know maine galti ki hai aur main apni saari galti accept karta hoon. Please Vaishnavi mujhe maaf kar do. Mera intention kabhi bhi tumhe hurt karna nahi tha.</p>
-                <p>Main tere rude behaviour se gusse mein aa gaya tha, lekin mujhe pata hai mujhe aisa nahi karna chahiye tha. <span class="highlight">Teri story pe Anush ka comment dekh ke main sach mein toot gaya tha.</span></p>
-                <p>Maine <span class="highlight">Antrika</span> ke saath koi chugli nahi ki thi. Main sirf itna kehne gaya tha ki apne bf ko control kare. Uske baad main tumse baat karna chahta tha, lekin tera behaviour mujhe bahut zyada hurt kar gaya.</p>
+                <p>I know maine galti ki hai aur main apni saari galti accept karta hoon. Please Vaishnavi mujhe maaf kar do.</p>
+                <p>Main tere rude behaviour se gusse mein aa gaya tha. <span class="highlight">Teri story pe Anush ka comment dekh ke main sach mein toot gaya tha.</span></p>
+                <p>Maine <span class="highlight">Antrika</span> ke saath koi chugli nahi ki thi. Main sirf itna kehne gaya tha ki wo apne bf ko control kare.</p>
                 <p>Meri wajah se agar teri friendship toot gayi ho, toh main dil se maafi maangta hoon.</p>
                 <p><b>Please Vaishnavi, ek last chance de do. I swear, I will treat you like a queen. 👑</b></p>
             </div>
@@ -219,210 +253,228 @@
             <h2>💌 A Letter From My Heart</h2>
             <div class="text-content">
                 <p><b>My Dearest Vaishnavi,</b></p>
-                <p>I am writing this to you because sometimes my spoken words fail to express the depth of what I truly feel in my heart. I know things have been difficult between us lately, and the thought that I might be the reason for your sadness kills me inside. But I want you to know one thing with absolute certainty: <b>you are the most beautiful part of my life.</b></p>
-                <p>Before you, I was just existing, but with you, I started living. You are not just my girlfriend; you are my best friend, my safe place, and the only person who truly understands me. I know I am not perfect. I make mistakes, and sometimes I say things I don't mean, but never for a second doubt my love for you.</p>
-                <p>I promise you, Vaishnavi, that I am here for the long run. I want to fix this, not just for today, but because I cannot imagine a future that doesn't have you in it.</p>
-                <p>Please let go of this anger and look at me—you will see a boy who is hopelessly in love with you and is willing to do whatever it takes to see you smile again.</p>
+                <p>Before you, I was just existing, but with you, I started living. You are not just my girlfriend; you are my best friend, my safe place, and the only person who truly understands me.</p>
+                <p>I know I am not perfect. I make mistakes. But never for a second doubt my love for you.</p>
+                <p>I cannot imagine a future that doesn't have you in it.</p>
                 <p>I love you more than words can say, and I will keep loving you until my very last breath. You are my forever. 💐🛐</p>
             </div>
         </section>
 
         <section>
-            <h2>🌹 Written For You</h2>
+            <h2>🌹 For You</h2>
             <div class="poetry-box">
-                I miss the smile upon your face,<br>
+                "I miss the smile upon your face,<br>
                 I miss your warm and loving embrace.<br>
-                I know I made you feel meaningful pain,<br>
-                And I promise not to do it again.<br><br>
-                Life without you is hard to bear,<br>
-                I look for you everywhere.<br>
                 Please forget the fights we had,<br>
                 Being apart makes me so sad.<br><br>
                 Vaishnavi, you are my heart and soul,<br>
-                Only you can make me whole.<br>
-                Please come back and hold my hand,<br>
-                Let's build the life that we had planned.<br><br>
-                I love you more than words can say,<br>
-                I miss you every single day. ❤️
+                Only you can make me whole." ❤️
+                <span class="signature">- urs devulla</span>
             </div>
         </section>
 
         <section>
             <h2>🏺 The Promise Jar</h2>
-            <p>Tap the jar to connect with my promises.</p>
-            <div class="jar-container" onclick="showPromise()">
+            <p>Tap the jar to see a new promise.</p>
+            <div class="jar-wrapper" onclick="openJar()">
                 <div class="jar-icon">🏺</div>
             </div>
-            <div class="promise-card" id="promise-display"></div>
         </section>
 
         <section>
             <h2>📸 Our Memories</h2>
             <div class="gallery">
-                <div class="polaroid">
-                    <img src="https://i.ibb.co/WvZCqXrJ/f050c675-8b43-4e06-be87-a6d71669c771-d146cfb7-252f-48cb-ba3c-9da826f0f173-2.jpg" alt="Us">
-                </div>
-                <div class="polaroid">
-                    <img src="https://i.ibb.co/xbLT1BP/Screenshot-20251227-063846-Photos.jpg" alt="Us">
-                </div>
-                <div class="polaroid">
-                    <img src="https://i.ibb.co/Txmdv3Kr/Screenshot-20251227-145012-Gallery.jpg" alt="Us">
-                </div>
-                <div class="polaroid">
-                    <img src="https://i.ibb.co/RkN4dd2P/Screenshot-20251227-145038-Gallery.jpg" alt="Us">
-                </div>
+                <div class="polaroid"><img src="https://i.ibb.co/WvZCqXrJ/f050c675-8b43-4e06-be87-a6d71669c771-d146cfb7-252f-48cb-ba3c-9da826f0f173-2.jpg"></div>
+                <div class="polaroid"><img src="https://i.ibb.co/xbLT1BP/Screenshot-20251227-063846-Photos.jpg"></div>
+                <div class="polaroid"><img src="https://i.ibb.co/Txmdv3Kr/Screenshot-20251227-145012-Gallery.jpg"></div>
+                <div class="polaroid"><img src="https://i.ibb.co/RkN4dd2P/Screenshot-20251227-145038-Gallery.jpg"></div>
             </div>
         </section>
 
         <section>
-            <h2>🎁 A Peace Offering</h2>
-            <div class="gift-box" onclick="openCoupon()">🎁</div>
-            <div class="coupon" id="coupon">
-                <h3>Coupon Code: LOVE2025</h3>
-                <p><b>Valid for:</b> One long hug 🫂 & Unlimited Momos 🥟</p>
-                <p style="font-size:12px;">Redeemable anytime. Lifetime validity.</p>
+            <h2>🎁 Peace Offering</h2>
+            <div class="coupon-container">
+                <div class="gift-btn" onclick="revealGift()">🎁</div>
+                <div class="coupon-card" id="myCoupon">
+                    <h3>Coupon Code: LOVE2025</h3>
+                    <p>Valid for: <b>One Long Hug 🫂 & Unlimited Momos 🥟</b></p>
+                    <p><small>Redeemable anytime. Lifetime validity.</small></p>
+                </div>
             </div>
         </section>
 
-        <a href="https://wa.me/919369068575" class="whatsapp-btn" id="wa-btn">Reply? 💬</a>
+        <a href="https://wa.me/919369068575" class="wa-btn" id="waBtn">Reply? 💬</a>
 
     </div>
 
-    <audio id="bg-music" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/23/audio_07b2a04654.mp3?filename=emotional-piano-113572.mp3" type="audio/mp3">
+    <div id="promise-modal" onclick="closeJar()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="promise-text" id="modalText">...</div>
+            <button class="close-btn" onclick="closeJar()">Keep This Promise ❤️</button>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2024/05/20/audio_33357c2d96.mp3?filename=sad-piano-199656.mp3" type="audio/mp3">
     </audio>
 
 <script>
-    // --- Scroll Animation Observer ---
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
-    });
+    // --- 1. PASSWORD CHECKER & MUSIC START ---
+    function checkPassword() {
+        const input = document.getElementById('passInput').value.toLowerCase().trim();
+        const errorMsg = document.getElementById('errorMsg');
+        
+        // Password logic: Checks if input contains "vaishnavi" or is just "1234"
+        if (input === "vaishnavi" || input === "vaishu") {
+            // Success
+            errorMsg.style.display = 'none';
+            document.getElementById('login-overlay').style.opacity = '0';
+            
+            // Play Music
+            const music = document.getElementById('bgMusic');
+            music.volume = 0.5;
+            music.play().catch(e => console.log("Audio Error:", e));
 
-    // --- Hearts Animation ---
+            setTimeout(() => {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                revealSections();
+                startChat();
+            }, 800);
+        } else {
+            // Fail
+            errorMsg.style.display = 'block';
+            document.getElementById('passInput').style.border = "2px solid red";
+        }
+    }
+
+    // --- 2. SCROLL ANIMATION ---
+    function revealSections() {
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(sec => observer.observe(sec));
+    }
+
+    // --- 3. BACKGROUND HEARTS ---
     function createHearts() {
         const container = document.getElementById('bg-hearts');
-        for(let i=0; i<20; i++) {
-            let heart = document.createElement('div');
-            heart.innerHTML = '❤';
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
             heart.className = 'heart-bg';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            heart.style.fontSize = (Math.random() * 30 + 15) + 'px';
+            heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
             container.appendChild(heart);
         }
     }
     createHearts();
 
-    // --- Start ---
-    function startExperience() {
-        document.getElementById('start-overlay').style.opacity = '0';
-        setTimeout(() => {
-            document.getElementById('start-overlay').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            // Trigger scroll animation for first sections
-            document.querySelectorAll('section').forEach(sec => {
-                 if(sec.getBoundingClientRect().top < window.innerHeight) sec.classList.add('visible');
-            });
-        }, 500);
-        
-        const music = document.getElementById('bg-music');
-        music.volume = 0.4;
-        music.play().catch(error => console.log("Audio play failed due to browser policy"));
-        startChat();
-    }
-
-    // --- Timer (Aug 2, 2025) ---
-    const startDate = new Date(2025, 7, 2); 
+    // --- 4. TIMER (Countdown to Aug 2, 2025) ---
+    const targetDate = new Date("August 2, 2025 00:00:00").getTime();
     setInterval(() => {
-        const now = new Date();
-        const diff = now - startDate;
-        if (diff < 0) {
-            document.getElementById("timer").innerText = "Waiting for August 2, 2025...";
-            return;
-        }
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById("timer").innerText = `${days} Days, ${hours} Hours, ${minutes} Min`;
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        if (diff < 0) { document.getElementById("days").innerText = "00"; return; }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = d;
+        document.getElementById("hours").innerText = h;
+        document.getElementById("minutes").innerText = m;
+        document.getElementById("seconds").innerText = s;
     }, 1000);
 
-    // --- Mood Slider ---
-    function updateMood() {
-        const val = document.getElementById('moodRange').value;
-        const text = document.getElementById('mood-text');
-        if(val > 80) text.innerText = "😡 I am furious!";
-        else if(val > 50) { text.innerText = "😠 I am still upset."; text.style.color = "#ff8fa3"; }
-        else { text.innerText = "💖 I might forgive you..."; text.style.color = "#d4af37"; }
-    }
-
-    // --- Chat ---
+    // --- 5. CHAT ANIMATION ---
     const messages = [
-        { text: "Vaishnavi...", delay: 500 },
-        { text: "I know you're hurt.", delay: 2500 },
-        { text: "Please just scroll down and read everything.", delay: 4500 },
-        { text: "It's all I ask.", delay: 6500 }
+        { text: "Vaishnavi...", delay: 1000 },
+        { text: "I know you are upset.", delay: 3000 },
+        { text: "Please just read this once.", delay: 5000 },
+        { text: "I made this for you. ❤️", delay: 7000 }
     ];
     function startChat() {
-        const chatBox = document.getElementById('chat-box');
-        let index = 0;
-        function addMessage() {
-            if (index < messages.length) {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = `msg sent`;
-                msgDiv.innerHTML = `${messages[index].text}`;
-                chatBox.appendChild(msgDiv);
-                setTimeout(() => msgDiv.classList.add('show'), 50);
-                chatBox.scrollTop = chatBox.scrollHeight;
-                index++;
-                if (index < messages.length) setTimeout(addMessage, messages[index-1].delay);
-                else setTimeout(() => document.getElementById('wa-btn').style.display = 'block', 3000);
+        const box = document.getElementById('chatBox');
+        let i = 0;
+        function addMsg() {
+            if (i < messages.length) {
+                const div = document.createElement('div');
+                div.className = `msg sent`;
+                div.innerText = messages[i].text;
+                box.appendChild(div);
+                setTimeout(() => div.classList.add('show'), 50);
+                box.scrollTop = box.scrollHeight;
+                i++;
+                if (i < messages.length) setTimeout(addMsg, messages[i-1].delay);
+                else setTimeout(() => document.getElementById('waBtn').style.display = 'block', 2000);
             }
         }
-        addMessage();
+        addMsg();
     }
 
-    // --- Promise Jar (Improved Interaction) ---
+    // --- 6. PROMISE JAR (GLITCH FIXED) ---
     const promises = [
-        "I promise to listen more and speak less.",
-        "I promise to never take you for granted again.",
-        "I promise unlimited Momos dates.",
-        "I promise to focus on 'Us' vs the problem.",
-        "I promise to make you feel secure and loved.",
-        "I promise to support your dreams, always."
+        "I promise to listen more and argue less.",
+        "I promise to always bring you Momos.",
+        "I promise to never take you for granted.",
+        "I promise to support your dreams.",
+        "I promise to communicate better.",
+        "I promise to love you, even on bad days.",
+        "I promise to make you feel like a Queen."
     ];
-    function showPromise() {
-        const display = document.getElementById('promise-display');
-        // Reset animation
-        display.style.display = 'none';
-        display.offsetHeight; /* trigger reflow */
+    
+    // Ensure we don't show the same promise twice in a row
+    let lastPromiseIndex = -1;
+
+    function openJar() {
+        const modal = document.getElementById('promise-modal');
+        const text = document.getElementById('modalText');
         
-        const randomPromise = promises[Math.floor(Math.random() * promises.length)];
-        display.style.display = 'block';
-        display.innerText = "✨ " + randomPromise;
-        triggerConfetti(10);
+        let newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * promises.length);
+        } while (newIndex === lastPromiseIndex);
+        
+        lastPromiseIndex = newIndex;
+        text.innerText = "✨ " + promises[newIndex];
+        
+        modal.style.display = 'flex';
+        triggerConfetti();
     }
 
-    // --- Coupon & Confetti ---
-    function openCoupon() {
-        document.getElementById('coupon').style.display = 'block';
-        triggerConfetti(60);
+    function closeJar() {
+        document.getElementById('promise-modal').style.display = 'none';
     }
-    function triggerConfetti(count) {
-        for(let i=0; i<count; i++) {
-            let c = document.createElement("div");
-            c.className = "confetti";
-            c.style.left = Math.random() * 100 + "vw";
-            c.style.background = ["#d4af37", "#ff8fa3", "#fff", "gold"][Math.floor(Math.random()*4)];
-            c.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+    // --- 7. MOOD SLIDER ---
+    function checkMood() {
+        const val = document.getElementById('moodRange').value;
+        const txt = document.getElementById('moodText');
+        if (val > 80) txt.innerText = "😡 Furious!";
+        else if (val > 40) { txt.innerText = "😠 Still Upset"; txt.style.color = "orange"; }
+        else { txt.innerText = "💖 Maybe forgiving..."; txt.style.color = "green"; }
+    }
+
+    // --- 8. COUPON & CONFETTI ---
+    function revealGift() {
+        document.getElementById('myCoupon').style.display = 'block';
+        triggerConfetti();
+    }
+    function triggerConfetti() {
+        for (let i = 0; i < 50; i++) {
+            const c = document.createElement('div');
+            c.className = 'confetti';
+            c.style.left = Math.random() * 100 + 'vw';
+            c.style.backgroundColor = ['#ffeb3b', '#ff4081', '#00e676', '#2979ff'][Math.floor(Math.random() * 4)];
+            c.style.animationDuration = (Math.random() * 2 + 2) + 's';
             document.body.appendChild(c);
-            setTimeout(() => c.remove(), 5000);
+            setTimeout(() => c.remove(), 4000);
         }
     }
 </script>
