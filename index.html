@@ -127,7 +127,7 @@
     .msg.show { opacity: 1; transform: translateY(0); }
     .sent { align-self: flex-end; background: #dcf8c6; border-bottom-right-radius: 2px; }
 
-    /* Promise List (New Design) */
+    /* Promise List */
     .promise-list {
         list-style: none; padding: 0; text-align: left;
     }
@@ -201,8 +201,8 @@
         </section>
 
         <section>
-            <h2>⏳ Time Since We Parted</h2>
-            <p>Counting every second since Aug 2, 2025...</p>
+            <h2>⏳ Time We Have Been Together</h2>
+            <p>Every second since Aug 2, 2025...</p>
             <div class="timer-container">
                 <div class="time-unit"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
                 <div class="time-unit"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
@@ -347,7 +347,7 @@
     }
     createHearts();
 
-    // --- 4. TIMER FIX (Running Properly) ---
+    // --- 4. TIMER (Running Properly) ---
     // Start Date: August 2, 2025
     const startDate = new Date("August 2, 2025 00:00:00").getTime();
     
@@ -355,9 +355,7 @@
         const now = new Date().getTime();
         const diff = now - startDate;
 
-        // If date is in future (e.g., testing on old device), handle gracefully
-        // But since you asked for "since", we assume current date > start date
-        // Just use Math.abs to avoid negative numbers if testing
+        // Use Math.abs or just max(0) to avoid negative if system date is before 
         const safeDiff = diff > 0 ? diff : 0;
 
         const d = Math.floor(safeDiff / (1000 * 60 * 60 * 24));
