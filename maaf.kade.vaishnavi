@@ -183,7 +183,8 @@
         <div class="login-box">
             <p style="color:white; margin-bottom:15px; font-size:0.9rem;">Enter Password (Hint: Your Name)</p>
             <input type="text" id="passInput" class="pass-input" placeholder="Password..." autocomplete="off">
-            <br>
+            
+
             <button class="enter-btn" onclick="checkPassword()">Unlock My Heart</button>
             <p id="errorMsg" class="error-msg">Incorrect Password 💔</p>
         </div>
@@ -241,19 +242,40 @@
         </section>
 
         <section>
+            <h2>🎶 This Song is Dedicated For You</h2>
+            <p>Every line of this song reminds me of you. Please listen...</p>
+            
+            <div style="margin-top: 20px;">
+                <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/5IWLDqsSnQgBjXGiryDtTk?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </section>
+        <section>
             <h2>🌹 For You</h2>
             <div class="poetry-box">
-                Vaishnavi, even though we’ve walked apart,<br>
-                You still hold the biggest piece of my heart.<br>
-                The silence now is loud and clear,<br>
-                Missing the voice I used to hear.<br><br>
-                Every memory plays like a favorite song,<br>
-                Wondering where exactly we went wrong.<br>
-                But even in this distance, true and deep,<br>
-                You are the promise I wanted to keep.<br><br>
-                If our paths never cross again, my dear,<br>
-                Know that my love for you was sincere.<br>
-                But if fate allows one more chance to be,<br>
+                Vaishnavi, even though we’ve walked apart,
+
+                You still hold the biggest piece of my heart.
+
+                The silence now is loud and clear,
+
+                Missing the voice I used to hear.
+
+
+                Every memory plays like a favorite song,
+
+                Wondering where exactly we went wrong.
+
+                But even in this distance, true and deep,
+
+                You are the promise I wanted to keep.
+
+
+                If our paths never cross again, my dear,
+
+                Know that my love for you was sincere.
+
+                But if fate allows one more chance to be,
+
                 I’ll wait for you, endlessly.
                 <span class="signature">- Urs Devulla</span>
             </div>
